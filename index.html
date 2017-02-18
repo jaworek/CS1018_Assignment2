@@ -1,89 +1,91 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Horse Racing</title>
-		<link rel="stylesheet" href="game.css" />
-		<script src="game.js"></script>
-	</head>
+<html lang="en">
 
-	<body>
+<head>
+	<meta charset="utf-8">
+	<title>Horse Racing</title>
+	<link rel="stylesheet" href="game.css" />
+	<script src="game.js"></script>
+</head>
 
-		<div id="horse1" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
+<body>
 
-				<div class="body">
-				</div>
+	<div id="horse1" class="horse standRight">
+		<div class="rider">
+			<div class="head">
+			</div>
+
+			<div class="body">
 			</div>
 		</div>
+	</div>
 
 
-		<div id="horse2" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
+	<div id="horse2" class="horse standRight">
+		<div class="rider">
+			<div class="head">
+			</div>
 
-				<div class="body">
-				</div>
+			<div class="body">
 			</div>
 		</div>
+	</div>
 
 
-		<div id="horse3" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
+	<div id="horse3" class="horse standRight">
+		<div class="rider">
+			<div class="head">
+			</div>
 
-				<div class="body">
-				</div>
+			<div class="body">
 			</div>
 		</div>
+	</div>
 
 
-		<div id="horse4" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
+	<div id="horse4" class="horse standRight">
+		<div class="rider">
+			<div class="head">
+			</div>
 
-				<div class="body">
-				</div>
+			<div class="body">
 			</div>
 		</div>
+	</div>
 
 
-		<div class="track">
-			<div id="startline">
+	<div class="track">
+		<div id="startline">
 
-			</div>
-			<div class="inner">
-				<div id="start">
-					Start Race
-				</div>
+		</div>
+		<div class="inner">
+			<button id="start">
+				Start Race
+			</button>
 
-				<div id="bet">
-					<p>You currently have <span id="funds">100</span></p>
-					<label>Bet Amount  (£)</label>
-					<input id="amount" />
-					<label>Bet on horse:</label>
-					<select id="bethorse">
+			<div id="bet">
+				<p>You currently have <span id="funds"></span></p>
+				<label>Bet Amount (£)</label>
+				<input type="number" id="amount">
+				<label>Bet on horse:</label>
+				<select id="bethorse">
 						<option value="horse1">White</option>
 						<option value="horse2">Blue</option>
 						<option value="horse2">Green</option>
 						<option value="horse2">Brown</option>
 					</select>
-				</div>
-				
-				<img src="images/tree.png" class="tree" />
+			</div>
 
-			
+			<img src="images/tree.png" alt="" class="tree">
+
+
 
 			<table id="results">
 				<thead>
-				<tr>
-					<th>Results</th>
-					<th></th>
-				</tr>
+					<tr>
+						<th>Results</th>
+						<th></th>
+					</tr>
 				</thead>
 				<tr>
 					<td>1st</td>
@@ -102,13 +104,10 @@
 					<td class="horse4"></td>
 				</tr>
 			</table>
-</div>
-
 		</div>
 
+	</div>
 
+</body>
 
-
-	
-	</body>
 </html>

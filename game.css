@@ -66,7 +66,7 @@ aside ul {list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom:
 
 
 
-.character.walkUp .head { 
+.character.walkUp .head {
 	background-position: 0px 0px;
 	animation: headbob 0.5s infinite;
 }
@@ -76,7 +76,7 @@ aside ul {list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom:
 }
 
 
-.character.walkDown .head { 
+.character.walkDown .head {
 	background-position: 0px -64px;
 	animation: headbob 0.75s infinite;
 }
@@ -85,7 +85,7 @@ aside ul {list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom:
     animation: walkdown 1s steps(3) infinite;
 }
 
-.character.walkLeft .head { 
+.character.walkLeft .head {
 	background-position: 0px -32px;
 	margin-top: -3px;
 	margin-left: -2px;
@@ -102,7 +102,7 @@ aside ul {list-style-type: none; margin-left: 0; padding-left: 0; margin-bottom:
 }
 
 
-.character.walkRight .head { 
+.character.walkRight .head {
 	background-position: 0px -96px;
 	margin-top: -3px;
 	margin-left: 4px;
@@ -229,7 +229,7 @@ border-image: url(images/inner.png); border-image-slice: 16 16 16 16 fill; borde
 	width: 2vw;
 	height: 15vh;
 background-color: #eee;
-background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black), 
+background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
 linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
 background-size:1vw 1vw;
 position: absolute;
@@ -396,7 +396,7 @@ opacity: 0.7;
 
 
 #start {
-	float: right;	
+	float: right;
 	margin: 1vw;
 	padding: 1vw;
   background: #3498db;
@@ -419,6 +419,15 @@ opacity: 0.7;
 
 #start:hover {
 	color: #000;
+}
+
+#start[disabled]{
+	background: rgb(126, 126, 126);
+	cursor: default;
+}
+
+#start[disabled]:hover{
+	color: #ffffff;
 }
 
 #bet, #results {
