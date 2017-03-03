@@ -4,6 +4,9 @@ var betAmount = 0;
 var interval = [];
 var clear = [];
 var direction = [];
+// source: https://freesound.org/people/qubodup/sounds/219456/
+// date: 02.03.2017
+var shot = new Audio('sounds/shot.flac');
 
 function startButton()
 {
@@ -23,6 +26,7 @@ function startButton()
     {
         console.log(betHorse);
         console.log(betAmount);
+        shot.play();
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
         startRace();
@@ -44,17 +48,16 @@ function startRace()
 
 function horseRun(id)
 {
+    var trackWidth = document.getElementById('track').offsetWidth;
+    var trackHeight = document.getElementById('track').offsetHeight;
     var horse = document.getElementById(id);
     var speed = Math.ceil(Math.random() * 4 + 6);
-    var line = document.getElementById('startline').parentNode.offsetLeft + document.getElementById('startline').offsetLeft + 16;
-    console.log('line ' + line);
+    var line = document.getElementById('startline').parentNode.offsetLeft + document.getElementById('startline').offsetLeft;
 
     interval[id] = setInterval(function()
     {
         var positionLeft = horse.offsetLeft;
         var positionTop = horse.offsetTop;
-        var screenWidth = window.innerWidth;
-        var screenHeight = window.innerHeight;
 
         switch (direction[id])
         {
@@ -81,50 +84,50 @@ function horseRun(id)
         var turnChance = Math.ceil(Math.random() * 50);
 
         // top-right corner
-        if (positionLeft > screenWidth * 0.73 && positionLeft <= screenWidth * 0.81 && positionTop > screenHeight * 0.02 && positionTop < screenHeight * 0.17)
+        if (positionLeft + 80 > trackWidth * 0.875 && positionTop < trackHeight * 0.1875)
         {
-            if (turnChance == 50 || positionLeft == Math.floor(screenWidth * 0.81))
+            if (turnChance == 50 || positionLeft + 96 == trackWidth)
             {
                 direction[id] = 1;
             }
         }
 
         // bottom-right corner
-        if (positionTop > screenHeight * 0.68 && positionTop <= screenHeight * 0.8 && positionLeft > screenWidth * 0.73 && positionLeft - 48 <= screenWidth * 0.81)
+        if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 48 > trackWidth * 0.875)
         {
-            //console.log('box2');
-            if (turnChance == 50 || positionTop == Math.floor(screenHeight * 0.8))
+            console.log('box2');
+            if (turnChance == 50 || positionTop + 88 == trackHeight)
             {
                 direction[id] = 2;
             }
         }
 
         // bottom-left corner
-        if (positionTop > screenHeight * 0.68 && positionTop - 4 <= screenHeight * 0.8 && positionLeft >= screenWidth * 0.04 && positionLeft < screenWidth * 0.11)
+        if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 72 < trackWidth * 0.125)
         {
-            if (turnChance == 50 || positionLeft == Math.ceil(screenWidth * 0.04))
+            if (turnChance == 50 || positionLeft + 44 == 0)
             {
                 direction[id] = 3;
             }
         }
 
         // top-left corner
-        if (positionTop > screenHeight * 0.03 && positionTop <= screenHeight * 0.16 && positionLeft >= screenWidth * 0.04 && positionLeft - 48 < screenWidth * 0.11)
+        if (positionTop + 64 < trackHeight * 0.1875 && positionLeft < trackWidth * 0.125)
         {
-            if (turnChance == 50 || positionTop == Math.ceil(screenHeight * 0.03))
+            if (turnChance == 50 || positionTop == Math.floor(trackHeight * (-0.02)))
             {
                 direction[id] = 0;
             }
         }
-
-        // line
-        if (positionTop > 0 && positionTop <= screenHeight * 0.16 && positionLeft + 96 == line)
-        {
-            clearInterval(interval[id]);
-            clearInterval(clear[id]);
-            horse.className = 'horse standRight';
-            results(id);
-        }
+        /*
+                                        // line
+                                        if (positionTop > 0 && positionTop <= screenHeight * 0.16 && positionLeft + 96 == line)
+                                        {
+                                            clearInterval(interval[id]);
+                                            clearInterval(clear[id]);
+                                            horse.className = 'horse standRight';
+                                            results(id);
+                                        }*/
     }, speed);
     clear[id] = setInterval(function()
     {
@@ -140,7 +143,9 @@ function results(id)
 {
     var results = document.getElementById('results');
     var place = results.getElementsByTagName('tr');
-    place[i].innerHTML = '<td class="' + id + '"></td>';
+    var newPlace = document.createElement('td');
+    newPlace.className = id;
+    place[i].appendChild(newPlace);
     i++;
 }
 
