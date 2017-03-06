@@ -53,9 +53,8 @@
 			</div>
 		</div>
 
-		<div id="startline">
+		<div id="startline"></div>
 
-		</div>
 		<div class="inner">
 			<button id="start">
 				Start Race
@@ -64,7 +63,9 @@
 			<div id="bet">
 				<p>You currently have <span id="funds"></span></p>
 				<label>Bet Amount (£)</label>
-				<input type="number" id="amount">
+				<input type="number" id="amount" required>
+				<label>Number of laps</label>
+				<input type="number" id="laps" value="1" required>
 				<label>Bet on horse:</label>
 				<select id="bethorse">
 						<option value="horse1">White</option>

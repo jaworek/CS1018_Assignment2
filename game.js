@@ -1,9 +1,11 @@
+var bob = 1;
 var funds = 100;
 var betHorse = 0;
 var betAmount = 0;
 var interval = [];
 var clear = [];
 var direction = [];
+var lap = [];
 // source: https://freesound.org/people/qubodup/sounds/219456/
 // date: 02.03.2017
 var shot = new Audio('sounds/shot.flac');
@@ -36,13 +38,17 @@ function startButton()
 function startRace()
 {
     console.log('Race started');
-    start.disabled = true;
+    document.getElementById('start').disabled = true;
+    document.getElementById('amount').disabled = true;
+    document.getElementById('laps').disabled = true;
+    document.getElementById('bethorse').disabled = true;
     var horse = document.getElementsByClassName('horse');
 
     for (var i = 0; i < horse.length; i++)
     {
         direction[horse[i].id] = 0;
         horseRun(horse[i].id);
+        lap[horse[i].id] = 0;
     }
 }
 
@@ -52,7 +58,7 @@ function horseRun(id)
     var trackHeight = document.getElementById('track').offsetHeight;
     var horse = document.getElementById(id);
     var speed = Math.ceil(Math.random() * 4 + 6);
-    var line = document.getElementById('startline').parentNode.offsetLeft + document.getElementById('startline').offsetLeft;
+    var line = document.getElementById('startline').offsetLeft;
 
     interval[id] = setInterval(function()
     {
@@ -95,7 +101,6 @@ function horseRun(id)
         // bottom-right corner
         if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 48 > trackWidth * 0.875)
         {
-            console.log('box2');
             if (turnChance == 50 || positionTop + 88 == trackHeight)
             {
                 direction[id] = 2;
@@ -119,15 +124,12 @@ function horseRun(id)
                 direction[id] = 0;
             }
         }
-        /*
-                                        // line
-                                        if (positionTop > 0 && positionTop <= screenHeight * 0.16 && positionLeft + 96 == line)
-                                        {
-                                            clearInterval(interval[id]);
-                                            clearInterval(clear[id]);
-                                            horse.className = 'horse standRight';
-                                            results(id);
-                                        }*/
+
+        // line
+        if (positionTop + 64 < trackHeight * 0.1875 && positionLeft + 96 == line)
+        {
+            laps(id);
+        }
     }, speed);
     clear[id] = setInterval(function()
     {
@@ -137,7 +139,19 @@ function horseRun(id)
     }, 1000);
 }
 
-var i = 1;
+function laps(id)
+{
+    var laps = document.getElementById('laps').value;
+    var horse = document.getElementById(id);
+    lap[id]++;
+    if (lap[id] == laps)
+    {
+        clearInterval(interval[id]);
+        clearInterval(clear[id]);
+        horse.className = 'horse standRight';
+        results(id);
+    }
+}
 
 function results(id)
 {
@@ -145,8 +159,8 @@ function results(id)
     var place = results.getElementsByTagName('tr');
     var newPlace = document.createElement('td');
     newPlace.className = id;
-    place[i].appendChild(newPlace);
-    i++;
+    place[bob].appendChild(newPlace);
+    bob++;
 }
 
 function myLoadFunction()
