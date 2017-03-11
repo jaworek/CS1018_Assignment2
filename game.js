@@ -1,7 +1,8 @@
-var bob = 1;
+var place = 1;
 var funds = 100;
 var betHorse = 0;
 var betAmount = 0;
+var announcement;
 var interval = [];
 var clear = [];
 var direction = [];
@@ -18,11 +19,11 @@ function startButton()
 
     if (betAmount > funds)
     {
-        console.log('Insufficient funds');
+        announcement.innerHTML = 'Insufficient funds.';
     }
     else if (betAmount === '' || parseInt(betAmount) <= 0)
     {
-        console.log('You need to specify the amount');
+        announcement.innerHTML = 'You need to specify the amount.';
     }
     else
     {
@@ -31,13 +32,14 @@ function startButton()
         shot.play();
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
+        clearResults();
         startRace();
     }
 }
 
 function startRace()
 {
-    console.log('Race started');
+    announcement.innerHTML = 'Race started!';
     document.getElementById('start').disabled = true;
     document.getElementById('amount').disabled = true;
     document.getElementById('laps').disabled = true;
@@ -47,8 +49,8 @@ function startRace()
     for (var i = 0; i < horse.length; i++)
     {
         direction[horse[i].id] = 0;
-        horseRun(horse[i].id);
         lap[horse[i].id] = 0;
+        horseRun(horse[i].id);
     }
 }
 
@@ -59,72 +61,74 @@ function horseRun(id)
     var horse = document.getElementById(id);
     var speed = Math.ceil(Math.random() * 4 + 6);
     var line = document.getElementById('startline').offsetLeft;
+    var positionLeft = horse.offsetLeft;
+    var positionTop = horse.offsetTop;
 
     interval[id] = setInterval(function()
     {
-        var positionLeft = horse.offsetLeft;
-        var positionTop = horse.offsetTop;
+        var turnChance = Math.ceil(Math.random() * 50);
 
         switch (direction[id])
         {
             case 0:
                 horse.className = 'horse runRight';
                 horse.style.left = positionLeft + 1 + 'px';
+                positionLeft++;
+
+                // top-right corner
+                if (positionLeft + 80 > trackWidth * 0.875 && positionTop < trackHeight * 0.1875)
+                {
+                    if (turnChance == 50 || positionLeft + 96 == trackWidth)
+                    {
+                        direction[id] = 1;
+                    }
+                }
                 break;
             case 1:
                 horse.className = 'horse runDown';
                 horse.style.top = positionTop + 1 + 'px';
+                positionTop++;
+
+                // bottom-right corner
+                if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 48 > trackWidth * 0.875)
+                {
+                    if (turnChance == 50 || positionTop + 88 == trackHeight)
+                    {
+                        direction[id] = 2;
+                    }
+                }
                 break;
             case 2:
                 horse.className = 'horse runLeft';
                 horse.style.left = positionLeft - 1 + 'px';
+                positionLeft--;
+
+                // bottom-left corner
+                if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 72 < trackWidth * 0.125)
+                {
+                    if (turnChance == 50 || positionLeft + 44 == 0)
+                    {
+                        direction[id] = 3;
+                    }
+                }
                 break;
             case 3:
                 horse.className = 'horse runUp';
                 horse.style.top = positionTop - 1 + 'px';
+                positionTop--;
+
+                // top-left corner
+                if (positionTop + 64 < trackHeight * 0.1875 && positionLeft < trackWidth * 0.125)
+                {
+                    if (turnChance == 50 || positionTop == Math.floor(trackHeight * (-0.02)))
+                    {
+                        direction[id] = 0;
+                    }
+                }
                 break;
             default:
                 console.log('Error');
         }
-
-        var turnChance = Math.ceil(Math.random() * 50);
-
-        // top-right corner
-        if (positionLeft + 80 > trackWidth * 0.875 && positionTop < trackHeight * 0.1875)
-        {
-            if (turnChance == 50 || positionLeft + 96 == trackWidth)
-            {
-                direction[id] = 1;
-            }
-        }
-
-        // bottom-right corner
-        if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 48 > trackWidth * 0.875)
-        {
-            if (turnChance == 50 || positionTop + 88 == trackHeight)
-            {
-                direction[id] = 2;
-            }
-        }
-
-        // bottom-left corner
-        if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 72 < trackWidth * 0.125)
-        {
-            if (turnChance == 50 || positionLeft + 44 == 0)
-            {
-                direction[id] = 3;
-            }
-        }
-
-        // top-left corner
-        if (positionTop + 64 < trackHeight * 0.1875 && positionLeft < trackWidth * 0.125)
-        {
-            if (turnChance == 50 || positionTop == Math.floor(trackHeight * (-0.02)))
-            {
-                direction[id] = 0;
-            }
-        }
-
         // line
         if (positionTop + 64 < trackHeight * 0.1875 && positionLeft + 96 == line)
         {
@@ -155,12 +159,50 @@ function laps(id)
 
 function results(id)
 {
-    var results = document.getElementById('results');
-    var place = results.getElementsByTagName('tr');
+    var tr = document.getElementsByTagName('tr');
     var newPlace = document.createElement('td');
     newPlace.className = id;
-    place[bob].appendChild(newPlace);
-    bob++;
+    tr[place].appendChild(newPlace);
+    if (place == 4)
+    {
+        checkWinner(tr);
+    }
+    else
+    {
+        place++;
+    }
+}
+
+function checkWinner(tr)
+{
+    if (tr[1].childNodes[3].className == betHorse)
+    {
+        announcement.innerHTML = 'You win!';
+        funds += betAmount * 2;
+        document.getElementById('funds').innerHTML = funds;
+    }
+    else
+    {
+        announcement.innerHTML = 'You lose.';
+    }
+    document.getElementById('start').disabled = false;
+    document.getElementById('amount').disabled = false;
+    document.getElementById('laps').disabled = false;
+    document.getElementById('bethorse').disabled = false;
+}
+
+function setPosition()
+{
+
+}
+
+function clearResults()
+{
+    place = 1;
+    document.getElementById('horse1').style.top = window.innerHeight * -0.03 + 'px';
+    document.getElementById('horse2').style.top = window.innerHeight * 0.01 + 'px';
+    document.getElementById('horse3').style.top = window.innerHeight * 0.05 + 'px';
+    document.getElementById('horse4').style.top = window.innerHeight * 0.09 + 'px';
 }
 
 function myLoadFunction()
@@ -169,6 +211,7 @@ function myLoadFunction()
     start.addEventListener('click', startButton);
 
     document.getElementById('funds').innerHTML = funds;
+    announcement = document.getElementById('announcement');
 }
 
 document.addEventListener('DOMContentLoaded', myLoadFunction);
