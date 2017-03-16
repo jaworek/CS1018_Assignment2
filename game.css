@@ -10,7 +10,7 @@ border-width: 16px;
 -webkit-border-image: url(images/outer.png) 14 15 14 16 repeat;
 -o-border-image: url(outer.png) 14 15 14 16 repeat;
 border-image: url(images/outer.png) 14 15 14 16 repeat; background-image: url(images/mud.png);
- position: absolute; height: 80vh; width: 80vw; 
+ position: absolute; height: 80vh; width: 80vw;
 }
 
 .track .inner {
@@ -173,7 +173,6 @@ opacity: 0.7;
 
 .horse.runDown .rider {
 	margin-left: -32px;
-
 }
 
 .horse.runDown .rider .head {
@@ -260,20 +259,40 @@ opacity: 0.7;
 	cursor: default;
 }
 
-#start[disabled]:hover{
-	color: #ffffff;
+#start[disabled]:hover
+{
+    color: #fff;
 }
 
-#bet, #results {
-	background-color: #ffefb4;
-	padding: 1vw;
-	width: 20vw;
-	border: 2px solid #555;
-	border-radius: 20px;
-	margin-top: 5vh;
-	margin-left: 2vw;
-	overflow: auto;
-	float: left;
+#bet,
+#results
+{
+    float: left;
+    overflow: auto;
+
+    width: 20vw;
+    margin-top: 5vh;
+    margin-left: 2vw;
+    padding: 1vw;
+
+    border: 2px solid #555;
+    border-radius: 20px;
+    background-color: #ffefb4;
+}
+
+#announcement
+{
+    width: 30vw;
+    margin-top: 1.5vh;
+    padding: 1vw;
+
+    text-align: center;
+
+    border: 2px solid #555;
+    border-radius: 20px;
+    background-color: #ffefb4;
+
+    align-self: flex-start;
 }
 
 #funds {font-weight: bold;}

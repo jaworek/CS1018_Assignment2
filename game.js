@@ -29,7 +29,7 @@ function startButton()
     {
         console.log(betHorse);
         console.log(betAmount);
-        shot.play();
+        //shot.play();
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
         clearResults();
@@ -130,7 +130,7 @@ function horseRun(id)
                 console.log('Error');
         }
         // line
-        if (positionTop + 64 < trackHeight * 0.1875 && positionLeft + 96 == line)
+        if (positionTop + 64 < trackHeight * 0.1875 && positionLeft + 84 == line)
         {
             laps(id);
         }
@@ -166,6 +166,7 @@ function results(id)
     if (place == 4)
     {
         checkWinner(tr);
+        setPosition();
     }
     else
     {
@@ -183,7 +184,7 @@ function checkWinner(tr)
     }
     else
     {
-        announcement.innerHTML = 'You lose.';
+        announcement.innerHTML = 'You lose. Better luck next time.';
     }
     document.getElementById('start').disabled = false;
     document.getElementById('amount').disabled = false;
@@ -193,16 +194,47 @@ function checkWinner(tr)
 
 function setPosition()
 {
+    var position = [-0.03, 0.01, 0.05, 0.09];
+    var used = [];
 
+    for (var i = 1; i < 5; i++)
+    {
+        var repeated = true;
+        var randomPosition;
+        while (repeated)
+        {
+            randomPosition = Math.floor(Math.random() * 4);
+
+            var alreadyUsed = false;
+            for (var j = 0; j < used.length; j++)
+            {
+                if (used[j] == randomPosition)
+                {
+                    alreadyUsed = true;
+                }
+            }
+
+            if (alreadyUsed === false)
+            {
+                used.push(randomPosition);
+                repeated = false;
+            }
+        }
+        document.getElementById('horse' + i).style.top = window.innerHeight * position[randomPosition] + 'px';
+    }
 }
 
 function clearResults()
 {
     place = 1;
-    document.getElementById('horse1').style.top = window.innerHeight * -0.03 + 'px';
-    document.getElementById('horse2').style.top = window.innerHeight * 0.01 + 'px';
-    document.getElementById('horse3').style.top = window.innerHeight * 0.05 + 'px';
-    document.getElementById('horse4').style.top = window.innerHeight * 0.09 + 'px';
+    for (var i = 0; i < 4; i++)
+    {
+        var test = document.getElementsByClassName('horse' + (i + 1));
+        if (test.length > 0)
+        {
+            test[0].parentNode.removeChild(test[0]);
+        }
+    }
 }
 
 function myLoadFunction()
@@ -212,6 +244,8 @@ function myLoadFunction()
 
     document.getElementById('funds').innerHTML = funds;
     announcement = document.getElementById('announcement');
+
+    setPosition();
 }
 
 document.addEventListener('DOMContentLoaded', myLoadFunction);
