@@ -7,15 +7,15 @@ var interval = [];
 var clear = [];
 var direction = [];
 var lap = [];
-// source: https://freesound.org/people/qubodup/sounds/219456/
-// date: 02.03.2017
-var shot = new Audio('sounds/shot.flac');
 
 function startButton()
 {
+    // source: https://freesound.org/people/qubodup/sounds/219456/
+    // date: 02.03.2017
+    var shot = new Audio('sounds/shot.flac');
     betHorse = document.getElementById('bethorse').value;
     betAmount = document.getElementById('amount').value;
-    console.log('Start button was pressed');
+    var laps = document.getElementById('laps').value;
 
     if (betAmount > funds)
     {
@@ -25,10 +25,12 @@ function startButton()
     {
         announcement.innerHTML = 'You need to specify the amount.';
     }
+    else if (laps <= 0)
+    {
+        announcement.innerHTML = 'Wrong number of laps.';
+    }
     else
     {
-        console.log(betHorse);
-        console.log(betAmount);
         //shot.play();
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
@@ -106,7 +108,7 @@ function horseRun(id)
                 // bottom-left corner
                 if (positionTop + 64 > trackHeight * 0.8125 && positionLeft + 72 < trackWidth * 0.125)
                 {
-                    if (turnChance == 50 || positionLeft + 44 == 0)
+                    if (turnChance == 50 || positionLeft + 44 === 0)
                     {
                         direction[id] = 3;
                     }
@@ -237,7 +239,7 @@ function clearResults()
     }
 }
 
-function myLoadFunction()
+function loadFunction()
 {
     var start = document.getElementById('start');
     start.addEventListener('click', startButton);
@@ -248,4 +250,4 @@ function myLoadFunction()
     setPosition();
 }
 
-document.addEventListener('DOMContentLoaded', myLoadFunction);
+document.addEventListener('DOMContentLoaded', loadFunction);
