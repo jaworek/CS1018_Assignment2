@@ -9,8 +9,13 @@
 </head>
 
 <body>
-	<div id="announcement">
-		Hello
+	<div class="header">
+		<div id="announcement">
+			Hello
+		</div>
+		<button id="open">
+			X
+		</button>
 	</div>
 	<div class="track" id="track">
 
@@ -59,11 +64,17 @@
 			</button>
 
 			<div id="bet">
-				<p>You currently have <span id="funds"></span></p>
+				<p>You currently have <span id="funds">100</span></p>
 				<label>Bet Amount (£)</label>
 				<input type="number" id="amount" required>
 				<label>Number of laps</label>
-				<input type="number" id="laps" value="1" required>
+				<select id="laps">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+				</select>
 				<label>Bet on horse:</label>
 				<select id="bethorse">
 						<option value="horse1">White</option>
@@ -74,7 +85,13 @@
 			</div>
 
 			<div id="odds">
-
+				<h4>Current odds: </h4>
+				<ul>
+					<li>White: 1/<span>2</span></li>
+					<li>Blue: 1/<span>2</span></li>
+					<li>Green: 1/<span>2</span></li>
+					<li>Brown: 1/<span>2</span></li>
+				</ul>
 			</div>
 
 			<img src="images/tree.png" alt="" class="tree">
@@ -102,6 +119,24 @@
 		</div>
 
 	</div>
+
+	<aside>
+		<a id="closeside">X</a>
+		<h3>Rules:</h3>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<h3>Instructions:</h3>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</aside>
 
 </body>
 

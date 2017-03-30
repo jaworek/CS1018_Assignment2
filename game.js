@@ -7,6 +7,11 @@ var interval = [];
 var clear = [];
 var direction = [];
 var lap = [];
+var odds = [2, 2, 2, 2];
+var trackWidth;
+var trackHeight;
+var line;
+var asideInterval;
 
 function startButton()
 {
@@ -31,6 +36,7 @@ function startButton()
     }
     else
     {
+        announcement.innerHTML = 'Race started!';
         //shot.play();
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
@@ -41,8 +47,8 @@ function startButton()
 
 function startRace()
 {
-    announcement.innerHTML = 'Race started!';
     document.getElementById('start').disabled = true;
+    document.getElementById('open').disabled = true;
     document.getElementById('amount').disabled = true;
     document.getElementById('laps').disabled = true;
     document.getElementById('bethorse').disabled = true;
@@ -58,11 +64,8 @@ function startRace()
 
 function horseRun(id)
 {
-    var trackWidth = document.getElementById('track').offsetWidth;
-    var trackHeight = document.getElementById('track').offsetHeight;
     var horse = document.getElementById(id);
     var speed = Math.ceil(Math.random() * 4 + 6);
-    var line = document.getElementById('startline').offsetLeft;
     var positionLeft = horse.offsetLeft;
     var positionTop = horse.offsetTop;
 
@@ -137,6 +140,7 @@ function horseRun(id)
             laps(id);
         }
     }, speed);
+
     clear[id] = setInterval(function()
     {
         clearInterval(interval[id]);
@@ -189,6 +193,7 @@ function checkWinner(tr)
         announcement.innerHTML = 'You lose. Better luck next time.';
     }
     document.getElementById('start').disabled = false;
+    document.getElementById('open').disabled = false;
     document.getElementById('amount').disabled = false;
     document.getElementById('laps').disabled = false;
     document.getElementById('bethorse').disabled = false;
@@ -223,6 +228,7 @@ function setPosition()
             }
         }
         document.getElementById('horse' + i).style.top = window.innerHeight * position[randomPosition] + 'px';
+        document.getElementById('horse' + i).style.zIndex = 996 + randomPosition;
     }
 }
 
@@ -239,12 +245,62 @@ function clearResults()
     }
 }
 
+function generateOdds()
+{
+
+}
+
+function asideHide()
+{
+    var aside = document.getElementsByTagName('aside')[0];
+    var positionLeft = parseInt(aside.style.marginLeft);
+    aside.style.marginLeft = (positionLeft + 1) + 'px';
+    if (positionLeft === 0)
+    {
+        clearInterval(asideInterval);
+    }
+}
+
+function asideClose()
+{
+    var aside = document.getElementsByTagName('aside')[0];
+    aside.style.marginLeft = '-240px';
+    asideInterval = setInterval(asideHide, 1);
+}
+
+function asideShow()
+{
+    var aside = document.getElementsByTagName('aside')[0];
+    var positionLeft = parseInt(aside.style.marginLeft);
+    aside.style.marginLeft = (positionLeft - 1) + 'px';
+    if (positionLeft == -240)
+    {
+        clearInterval(asideInterval);
+    }
+}
+
+function asideOpen()
+{
+    var aside = document.getElementsByTagName('aside')[0];
+    aside.style.marginLeft = '0px';
+    asideInterval = setInterval(asideShow, 1);
+}
+
 function loadFunction()
 {
     var start = document.getElementById('start');
     start.addEventListener('click', startButton);
 
-    document.getElementById('funds').innerHTML = funds;
+    var close = document.getElementById('closeside');
+    close.addEventListener('click', asideClose);
+    var open = document.getElementById('open');
+    open.addEventListener('click', asideOpen);
+
+    trackWidth = document.getElementById('track').offsetWidth;
+    trackHeight = document.getElementById('track').offsetHeight;
+
+    line = document.getElementById('startline').offsetLeft;
+
     announcement = document.getElementById('announcement');
 
     setPosition();
