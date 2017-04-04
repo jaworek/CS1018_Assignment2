@@ -12,11 +12,7 @@ body
 
     background-image: url(images/bg.png);
 
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
+    flex-flow: column;
     align-items: center;
 }
 
@@ -32,24 +28,35 @@ body
 {
     position: absolute;
 
-    display: table;width: 80vw;height: 80vh;
+    display: table;
+
+    width: 80vw;
+    height: 80vh;
+    margin-top: 3em;
+    margin-right: 10vw;
+    margin-left: 10vw;
 
     border-collapse: separate;
 
     border-width: 16px;
     border-style: solid;
     -o-border-image: url(outer.png) 14 15 14 16 repeat;
-    border-image: url(images/outer.png) 14 15 14 16 repeat; background-image: url(images/mud.png);
+       border-image: url(images/outer.png) 14 15 14 16 repeat; background-image: url(images/mud.png);
 }
 
-.track .inner
+.inner
 {
-    display: table; width: 60vw; height: 50vh;margin-top: 15vh; margin-left: 10vw;
+    display: table;
+
+    width: 60vw;
+    height: 50vh;
+    margin-top: 15vh;
+    margin-left: 10vw;
 
     border-collapse: separate;
 
     -o-border-image: url(images/inner.png);
-    border-image: url(images/inner.png);
+       border-image: url(images/inner.png);
     border-image-slice: 16 16 16 16 fill;
     border-image-width: 16px 16px 16px 16px; border-image-outset: 0 0 0 0;
     border-image-repeat: round round;
@@ -283,26 +290,30 @@ body
 
 #horse1
 {
-    position: absolute; z-index: 999;top: -3vh;
+    position: absolute; z-index: 999;
+    top: -3vh;
 }
 
 #horse2
 {
-    position: absolute; z-index: 999;top: 1vh;
+    position: absolute; z-index: 999;
+    top: 1vh;
 
     background-image: url(images/horse3.png);
 }
 
 #horse3
 {
-    position: absolute; z-index: 999;top: 5vh;
+    position: absolute; z-index: 999;
+    top: 5vh;
 
     background-image: url(images/horse1.png);
 }
 
 #horse4
 {
-    position: absolute; z-index: 999;top: 9vh;
+    position: absolute; z-index: 999;
+    top: 9vh;
 
     background-image: url(images/horse4.png);
 }
@@ -619,10 +630,6 @@ body
     margin-top: 5vh;
     margin-left: 2vw;
     padding: 1vw;
-
-    border: 2px solid #555;
-    border-radius: 20px;
-    background-color: #ffefb4;
 }
 
 #results
@@ -639,13 +646,24 @@ aside
     position: fixed;
     z-index: 1000;left: 100%;
 
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
     width: 200px;
-    height: 100vh;
-    margin-left: 0;
+    height: calc(100vh - 40px);
     padding: 20px;
 
     border-left: 5px solid #bbb;
     background-color: #ddd;
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 #closeside
@@ -654,7 +672,6 @@ aside
 
     float: right;
 
-    width: 100%;
     margin-top: 1em;
     margin-left: auto;
 
@@ -662,7 +679,7 @@ aside
     text-align: right;
 }
 
-.header
+header
 {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -672,17 +689,17 @@ aside
 
     -ms-flex-item-align: start;
     align-self: flex-start;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
+    -webkit-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
 }
 
 #announcement
 {
+    font-size: 20px;
+
     width: 30vw;
     margin-top: 1.5vh;
-    margin-right: 30vw;
-    margin-left: 35vw;
     padding: 1vw;
 
     -webkit-user-select: none;
@@ -691,10 +708,6 @@ aside
             user-select: none;
     text-align: center;
     pointer-events: none;
-
-    border: 2px solid #555;
-    border-radius: 20px;
-    background-color: #ffefb4;
 }
 
 #open
@@ -736,6 +749,7 @@ aside
 {
     font-weight: bold;
 }
+
 #funds:before
 {
     content: '£';
@@ -758,6 +772,7 @@ select
     display: block;
     float: left; width: 8vw; margin-bottom: .5vh;
 }
+
 label
 {
     clear: left;
@@ -805,10 +820,6 @@ label
         -ms-user-select: none;
             user-select: none;
     pointer-events: none;
-
-    border: 2px solid #555;
-    border-radius: 20px;
-    background-color: #ffefb4;
 }
 
 #odds ul
@@ -817,4 +828,43 @@ label
     padding: 0;
 
     list-style: none;
+}
+
+.timer
+{
+    font-size: 20px;
+
+    margin-top: 1.5vh;
+    padding: 1vw;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+    pointer-events: none;
+}
+
+.credits
+{
+    width: 100%;
+}
+
+.info
+{
+    width: 100%;
+}
+
+.container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.card
+{
+    border: 2px solid #555;
+    border-radius: 20px;
+    background-color: #ffefb4;
 }

@@ -1,16 +1,23 @@
+// bet variables
 var place = 1;
 var funds = 100;
 var betHorse = 0;
 var betAmount = 0;
-var announcement;
+// run variables
 var interval = [];
 var clear = [];
 var direction = [];
 var lap = [];
-var oddsTable = [];
+// track variables
 var trackWidth;
 var trackHeight;
 var line;
+// timer variables
+var timer;
+var ticks = 0;
+// miscellaneous
+var announcement;
+var oddsTable = [];
 var asideInterval;
 
 function startButton()
@@ -42,6 +49,8 @@ function startButton()
         document.getElementById('funds').innerHTML = funds;
         clearResults();
         startRace();
+        ticks = 0;
+        timer = setInterval(timerStart, 10);
     }
 }
 
@@ -62,6 +71,7 @@ function startRace()
     }
 }
 
+// makes each horse run, turn and stop
 function horseRun(id)
 {
     var horse = document.getElementById(id);
@@ -149,6 +159,7 @@ function horseRun(id)
     }, 1000);
 }
 
+// tracks number of laps that each horse completed
 function laps(id)
 {
     var laps = document.getElementById('laps').value;
@@ -163,6 +174,7 @@ function laps(id)
     }
 }
 
+// displays results on the screen
 function results(id)
 {
     var tr = document.getElementsByTagName('tr');
@@ -171,6 +183,7 @@ function results(id)
     tr[place].appendChild(newPlace);
     if (place == 4)
     {
+        clearInterval(timer);
         checkWinner(tr);
         setPosition();
     }
@@ -180,6 +193,7 @@ function results(id)
     }
 }
 
+// checks which horse won
 function checkWinner(tr)
 {
     var winner = tr[1].childNodes[3].className;
@@ -202,6 +216,7 @@ function checkWinner(tr)
     generateOdds(winner);
 }
 
+// generates odds for each horse
 function generateOdds(winner)
 {
     var odds = document.getElementById('odds');
@@ -218,12 +233,13 @@ function generateOdds(winner)
         }
         else
         {
-            oddsTable['horse' + (i + 1)] *= 2;
+            Math.ceil(oddsTable['horse' + (i + 1)] *= 1.5);
         }
         record[i].innerHTML = oddsTable['horse' + (i + 1)];
     }
 }
 
+// sets randomly position of the horse at the start
 function setPosition()
 {
     var position = [-0.03, 0.01, 0.05, 0.09];
@@ -257,6 +273,7 @@ function setPosition()
     }
 }
 
+// clears result table
 function clearResults()
 {
     place = 1;
@@ -270,6 +287,7 @@ function clearResults()
     }
 }
 
+// open, close and animate aside
 function asideHide()
 {
     var aside = document.getElementsByTagName('aside')[0];
@@ -306,6 +324,40 @@ function asideOpen()
     asideInterval = setInterval(asideShow, 1);
 }
 
+// tracks and displays time during the race
+function timerStart()
+{
+    ticks++;
+    var csec = ticks % 100;
+    var sec = Math.floor((ticks / 100) % 60);
+    var min = Math.floor((ticks / 6000));
+    if (csec < 10)
+    {
+        document.getElementById('csec').innerHTML = '0' + csec;
+    }
+    else
+    {
+        document.getElementById('csec').innerHTML = csec;
+    }
+    if (sec < 10)
+    {
+        document.getElementById('sec').innerHTML = '0' + sec;
+    }
+    else
+    {
+        document.getElementById('sec').innerHTML = sec;
+    }
+    if (min < 10)
+    {
+        document.getElementById('min').innerHTML = '0' + min;
+    }
+    else
+    {
+        document.getElementById('min').innerHTML = min;
+    }
+}
+
+// initializes and loads all necessary data
 function loadFunction()
 {
     var start = document.getElementById('start');

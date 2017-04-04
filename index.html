@@ -3,140 +3,163 @@
 
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Horse Racing</title>
+
+	<meta name="author" content="Jan Jaworski">
+	<meta name="description" content="Horse racing simulator">
+	<meta name="keywords" content="horse, racing, bet, hazard">
+
 	<link rel="stylesheet" href="game.css" />
 	<script src="game.js"></script>
 </head>
 
 <body>
-	<div class="header">
-		<div id="announcement">
+
+	<aside>
+		<a id="closeside">X</a>
+
+		<div class="info">
+			<h3>Rules:</h3>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
+		<div class="info">
+			<h3>Instructions:</h3>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
+		<footer class="credits">
+			Created by <a href="https://github.com/jaworek" target="_blank">Jan Jaworski</a>
+		</footer>
+	</aside>
+
+	<header>
+		<div class="timer card" id="timer">
+			<span id="min">00</span>:<span id="sec">00</span>:<span id="csec">00</span>
+		</div>
+		<div class="card" id="announcement">
 			Hello
 		</div>
 		<button id="open">
 			X
 		</button>
-	</div>
-	<div class="track" id="track">
+	</header>
 
-		<div id="horse1" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
-				<div class="body">
+	<div class="container">
+		<main class="track" id="track">
+
+			<div id="horse1" class="horse standRight">
+				<div class="rider">
+					<div class="head">
+					</div>
+					<div class="body">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div id="horse2" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
-				<div class="body">
-				</div>
-			</div>
-		</div>
-
-		<div id="horse3" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
-				<div class="body">
+			<div id="horse2" class="horse standRight">
+				<div class="rider">
+					<div class="head">
+					</div>
+					<div class="body">
+					</div>
 				</div>
 			</div>
-		</div>
 
-
-		<div id="horse4" class="horse standRight">
-			<div class="rider">
-				<div class="head">
-				</div>
-				<div class="body">
+			<div id="horse3" class="horse standRight">
+				<div class="rider">
+					<div class="head">
+					</div>
+					<div class="body">
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div id="startline"></div>
 
-		<div class="inner">
-			<button id="start">
+			<div id="horse4" class="horse standRight">
+				<div class="rider">
+					<div class="head">
+					</div>
+					<div class="body">
+					</div>
+				</div>
+			</div>
+
+			<div id="startline"></div>
+
+			<div class="inner">
+				<button id="start">
 				Start Race
 			</button>
 
-			<div id="bet">
-				<p>You currently have <span id="funds">100</span></p>
-				<label>Bet Amount (£)</label>
-				<input type="number" id="amount" required>
-				<label>Number of laps</label>
-				<select id="laps">
+				<div class="card" id="bet">
+					<p>You currently have <span id="funds">100</span></p>
+					<label>Bet Amount (£)</label>
+					<input type="number" id="amount" required>
+					<label>Number of laps</label>
+					<select id="laps">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
 				</select>
-				<label>Bet on horse:</label>
-				<select id="bethorse">
+					<label>Bet on horse:</label>
+					<select id="bethorse">
 						<option value="horse1">White</option>
 						<option value="horse2">Blue</option>
 						<option value="horse2">Green</option>
 						<option value="horse2">Brown</option>
 				</select>
-			</div>
+				</div>
 
-			<div id="odds">
-				<h4>Current odds: </h4>
-				<ul>
-					<li>White: 1/<span>2</span></li>
-					<li>Blue: 1/<span>2</span></li>
-					<li>Green: 1/<span>2</span></li>
-					<li>Brown: 1/<span>2</span></li>
-				</ul>
-			</div>
+				<div class="card" id="odds">
+					<h4>Current odds: </h4>
+					<ul>
+						<li>White: 1/<span>2</span></li>
+						<li>Blue: 1/<span>2</span></li>
+						<li>Green: 1/<span>2</span></li>
+						<li>Brown: 1/<span>2</span></li>
+					</ul>
+				</div>
 
-			<img src="images/tree.png" alt="" class="tree">
+				<img src="images/tree.png" alt="" class="tree">
 
-			<table id="results">
-				<thead>
+				<table class="card" id="results">
+					<thead>
+						<tr>
+							<th>Results</th>
+							<th></th>
+						</tr>
+					</thead>
 					<tr>
-						<th>Results</th>
-						<th></th>
+						<td>1st</td>
 					</tr>
-				</thead>
-				<tr>
-					<td>1st</td>
-				</tr>
-				<tr>
-					<td>2nd</td>
-				</tr>
-				<tr>
-					<td>3rd</td>
-				</tr>
-				<tr>
-					<td>4th</td>
-				</tr>
-			</table>
-		</div>
+					<tr>
+						<td>2nd</td>
+					</tr>
+					<tr>
+						<td>3rd</td>
+					</tr>
+					<tr>
+						<td>4th</td>
+					</tr>
+				</table>
+			</div>
 
+		</main>
 	</div>
-
-	<aside>
-		<a id="closeside">X</a>
-		<h3>Rules:</h3>
-		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-		<h3>Instructions:</h3>
-		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-		</ul>
-	</aside>
 
 </body>
 
