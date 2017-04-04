@@ -7,7 +7,7 @@ var interval = [];
 var clear = [];
 var direction = [];
 var lap = [];
-var odds = [2, 2, 2, 2];
+var oddsTable = [];
 var trackWidth;
 var trackHeight;
 var line;
@@ -182,10 +182,11 @@ function results(id)
 
 function checkWinner(tr)
 {
-    if (tr[1].childNodes[3].className == betHorse)
+    var winner = tr[1].childNodes[3].className;
+    if (winner == betHorse)
     {
         announcement.innerHTML = 'You win!';
-        funds += betAmount * 2;
+        funds += betAmount * oddsTable[betHorse];
         document.getElementById('funds').innerHTML = funds;
     }
     else
@@ -197,6 +198,30 @@ function checkWinner(tr)
     document.getElementById('amount').disabled = false;
     document.getElementById('laps').disabled = false;
     document.getElementById('bethorse').disabled = false;
+
+    generateOdds(winner);
+}
+
+function generateOdds(winner)
+{
+    var odds = document.getElementById('odds');
+    var record = odds.getElementsByTagName('span');
+    for (var i = 0; i < record.length; i++)
+    {
+        if (winner == 'horse' + (i + 1))
+        {
+            Math.ceil(oddsTable['horse' + (i + 1)] /= 2);
+            if (oddsTable['horse' + (i + 1)] < 2)
+            {
+                oddsTable['horse' + (i + 1)] = 2;
+            }
+        }
+        else
+        {
+            oddsTable['horse' + (i + 1)] *= 2;
+        }
+        record[i].innerHTML = oddsTable['horse' + (i + 1)];
+    }
 }
 
 function setPosition()
@@ -243,11 +268,6 @@ function clearResults()
             test[0].parentNode.removeChild(test[0]);
         }
     }
-}
-
-function generateOdds()
-{
-
 }
 
 function asideHide()
@@ -304,6 +324,14 @@ function loadFunction()
     announcement = document.getElementById('announcement');
 
     setPosition();
+
+    var odds = document.getElementById('odds');
+    var record = odds.getElementsByTagName('span');
+    for (var i = 0; i < record.length; i++)
+    {
+        oddsTable['horse' + (i + 1)] = Math.ceil(Math.random() * 4) + 1;
+        record[i].innerHTML = oddsTable['horse' + (i + 1)];
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadFunction);
