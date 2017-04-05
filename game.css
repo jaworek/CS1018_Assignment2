@@ -644,7 +644,8 @@ body
 aside
 {
     position: fixed;
-    z-index: 1000;left: 100%;
+    z-index: 1000;
+    left: 100%;
 
     display: -webkit-box;
     display: -ms-flexbox;
@@ -660,7 +661,7 @@ aside
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
+        flex-flow: row wrap;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;

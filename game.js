@@ -20,6 +20,7 @@ var announcement;
 var oddsTable = [];
 var asideInterval;
 
+// called after button was pressed, checks if all input data is correct and starts the race
 function startButton()
 {
     // source: https://freesound.org/people/qubodup/sounds/219456/
@@ -54,8 +55,10 @@ function startButton()
     }
 }
 
+// starts the race, blocks all inputs
 function startRace()
 {
+    asideClose();
     document.getElementById('start').disabled = true;
     document.getElementById('open').disabled = true;
     document.getElementById('amount').disabled = true;
@@ -292,17 +295,19 @@ function asideHide()
 {
     var aside = document.getElementsByTagName('aside')[0];
     var positionLeft = parseInt(aside.style.marginLeft);
-    aside.style.marginLeft = (positionLeft + 1) + 'px';
     if (positionLeft === 0)
     {
         clearInterval(asideInterval);
+    }
+    else
+    {
+        aside.style.marginLeft = (positionLeft + 1) + 'px';
     }
 }
 
 function asideClose()
 {
     var aside = document.getElementsByTagName('aside')[0];
-    aside.style.marginLeft = '-240px';
     asideInterval = setInterval(asideHide, 1);
 }
 
@@ -310,10 +315,13 @@ function asideShow()
 {
     var aside = document.getElementsByTagName('aside')[0];
     var positionLeft = parseInt(aside.style.marginLeft);
-    aside.style.marginLeft = (positionLeft - 1) + 'px';
     if (positionLeft == -240)
     {
         clearInterval(asideInterval);
+    }
+    else
+    {
+        aside.style.marginLeft = (positionLeft - 1) + 'px';
     }
 }
 
@@ -384,6 +392,9 @@ function loadFunction()
         oddsTable['horse' + (i + 1)] = Math.ceil(Math.random() * 4) + 1;
         record[i].innerHTML = oddsTable['horse' + (i + 1)];
     }
+
+    var aside = document.getElementsByTagName('aside')[0];
+    aside.style.marginLeft = '0px';
 }
 
 document.addEventListener('DOMContentLoaded', loadFunction);
