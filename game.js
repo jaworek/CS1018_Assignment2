@@ -12,6 +12,7 @@ var lap = [];
 var trackWidth;
 var trackHeight;
 var line;
+var laps;
 // timer variables
 var timer;
 var ticks = 0;
@@ -23,54 +24,56 @@ var asideInterval;
 // called after button was pressed, checks if all input data is correct and starts the race
 function startButton()
 {
-    // source: https://freesound.org/people/qubodup/sounds/219456/
-    // date: 02.03.2017
-    var shot = new Audio('sounds/shot.flac');
     betHorse = document.getElementById('bethorse').value;
     betAmount = document.getElementById('amount').value;
-    var laps = document.getElementById('laps').value;
+    laps = document.getElementById('laps').value;
 
     if (betAmount > funds)
     {
         announcement.innerHTML = 'Insufficient funds.';
     }
-    else if (betAmount === '' || parseInt(betAmount) <= 0)
+    else if (betAmount === '' || betAmount <= 0)
     {
         announcement.innerHTML = 'You need to specify the amount.';
-    }
-    else if (laps <= 0)
-    {
-        announcement.innerHTML = 'Wrong number of laps.';
     }
     else
     {
         announcement.innerHTML = 'Race started!';
-        //shot.play();
+
         funds -= betAmount;
         document.getElementById('funds').innerHTML = funds;
+
         clearResults();
         startRace();
-        ticks = 0;
-        timer = setInterval(timerStart, 10);
     }
 }
 
 // starts the race, blocks all inputs
 function startRace()
 {
+    // source: https://freesound.org/people/qubodup/sounds/219456/
+    // date: 02.03.2017
+    var shot = new Audio('sounds/shot.flac');
+    //shot.play();
+
+    ticks = 0;
+    timer = setInterval(timerStart, 10);
+
     asideClose();
+
     document.getElementById('start').disabled = true;
     document.getElementById('open').disabled = true;
     document.getElementById('amount').disabled = true;
     document.getElementById('laps').disabled = true;
     document.getElementById('bethorse').disabled = true;
-    var horse = document.getElementsByClassName('horse');
 
-    for (var i = 0; i < horse.length; i++)
+    var horses = document.getElementsByClassName('horse');
+
+    for (var i = 0; i < horses.length; i++)
     {
-        direction[horse[i].id] = 0;
-        lap[horse[i].id] = 0;
-        horseRun(horse[i].id);
+        direction[horses[i].id] = 0;
+        lap[horses[i].id] = 0;
+        horseRun(horses[i].id);
     }
 }
 
@@ -150,7 +153,7 @@ function horseRun(id)
         // line
         if (positionTop + 64 < trackHeight * 0.1875 && positionLeft + 84 == line)
         {
-            laps(id);
+            lapCounter(id);
         }
     }, speed);
 
@@ -163,9 +166,8 @@ function horseRun(id)
 }
 
 // tracks number of laps that each horse completed
-function laps(id)
+function lapCounter(id)
 {
-    var laps = document.getElementById('laps').value;
     var horse = document.getElementById(id);
     lap[id]++;
     if (lap[id] == laps)
@@ -177,7 +179,7 @@ function laps(id)
     }
 }
 
-// displays results on the screen
+// displays results table
 function results(id)
 {
     var tr = document.getElementsByTagName('tr');
@@ -193,6 +195,20 @@ function results(id)
     else
     {
         place++;
+    }
+}
+
+// clears result table
+function clearResults()
+{
+    place = 1;
+    for (var i = 0; i < 4; i++)
+    {
+        var test = document.getElementsByClassName('horse' + (i + 1));
+        if (test.length > 0)
+        {
+            test[0].parentNode.removeChild(test[0]);
+        }
     }
 }
 
@@ -220,6 +236,17 @@ function checkWinner(tr)
 }
 
 // generates odds for each horse
+function initializeOdds()
+{
+    var odds = document.getElementById('odds');
+    var record = odds.getElementsByTagName('span');
+    for (var i = 0; i < record.length; i++)
+    {
+        oddsTable['horse' + (i + 1)] = Math.ceil(Math.random() * 4) + 1;
+        record[i].innerHTML = oddsTable['horse' + (i + 1)];
+    }
+}
+
 function generateOdds(winner)
 {
     var odds = document.getElementById('odds');
@@ -273,20 +300,6 @@ function setPosition()
         }
         document.getElementById('horse' + i).style.top = window.innerHeight * position[randomPosition] + 'px';
         document.getElementById('horse' + i).style.zIndex = 996 + randomPosition;
-    }
-}
-
-// clears result table
-function clearResults()
-{
-    place = 1;
-    for (var i = 0; i < 4; i++)
-    {
-        var test = document.getElementsByClassName('horse' + (i + 1));
-        if (test.length > 0)
-        {
-            test[0].parentNode.removeChild(test[0]);
-        }
     }
 }
 
@@ -379,20 +392,12 @@ function loadFunction()
 
     trackWidth = document.getElementById('track').offsetWidth;
     trackHeight = document.getElementById('track').offsetHeight;
-
     line = document.getElementById('startline').offsetLeft;
 
     announcement = document.getElementById('announcement');
 
     setPosition();
-
-    var odds = document.getElementById('odds');
-    var record = odds.getElementsByTagName('span');
-    for (var i = 0; i < record.length; i++)
-    {
-        oddsTable['horse' + (i + 1)] = Math.ceil(Math.random() * 4) + 1;
-        record[i].innerHTML = oddsTable['horse' + (i + 1)];
-    }
+    initializeOdds();
 
     var aside = document.getElementsByTagName('aside')[0];
     aside.style.marginLeft = '0px';

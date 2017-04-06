@@ -16,6 +16,69 @@ body
     align-items: center;
 }
 
+aside
+{
+    position: fixed;
+    z-index: 1000;
+    left: 100%;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    width: 200px;
+    height: calc(100vh - 40px);
+    padding: 20px;
+
+    border-left: 5px solid #bbb;
+    background-color: #ddd;
+
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+header
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    width: 100vw;
+
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+    -webkit-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
+}
+
+img
+{
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    pointer-events: none;
+}
+
+label,
+input,
+select
+{
+    display: block;
+    float: left; width: 8vw; margin-bottom: .5vh;
+}
+
+label
+{
+    clear: left;
+}
+
 .tree
 {
     float: right;
@@ -68,180 +131,6 @@ body
 {
     background-image: url(images/horse2.png);
 }
-.horse.runLeft
-{
-    display: block;
-
-    width: 96px;
-    height: 60px;
-
-    -webkit-animation: horseLeft steps(1) .5s  infinite;
-            animation: horseLeft steps(1) .5s  infinite;
-
-    background-position: 0 -256px;
-}
-
-@-webkit-keyframes horseLeft
-{
-    0%,
-    100%
-    {
-        background-position: 0 -256px;
-    }
-    50%
-    {
-        background-position: 0 -450px;
-    }
-}
-
-@keyframes horseLeft
-{
-    0%,
-    100%
-    {
-        background-position: 0 -256px;
-    }
-    50%
-    {
-        background-position: 0 -450px;
-    }
-}
-
-
-.horse.runRight
-{
-    display: block;
-
-    width: 96px;
-    height: 60px;
-
-    -webkit-animation: horseRight steps(1) .5s  infinite;
-            animation: horseRight steps(1) .5s  infinite;
-
-    background-position: 0 -320px;
-}
-
-@-webkit-keyframes horseRight
-{
-    0%,
-    100%
-    {
-        background-position: 0 -320px;
-    }
-    50%
-    {
-        background-position: 0 -512px;
-    }
-}
-
-@keyframes horseRight
-{
-    0%,
-    100%
-    {
-        background-position: 0 -320px;
-    }
-    50%
-    {
-        background-position: 0 -512px;
-    }
-}
-
-.horse.runDown
-{
-    width: 48px;
-    height: 64px;
-
-    -webkit-animation: horseDown steps(1) .75s  infinite;
-            animation: horseDown steps(1) .75s  infinite;
-
-    background-position: 48px 192px;
-}
-
-
-@-webkit-keyframes horseDown
-{
-    0%,
-    100%
-    {
-        background-position: 48px -192px;
-    }
-    33%
-    {
-        background-position: 48px -380px;
-    }
-    66%
-    {
-        background-position: 48px 0;
-    }
-}
-
-
-@keyframes horseDown
-{
-    0%,
-    100%
-    {
-        background-position: 48px -192px;
-    }
-    33%
-    {
-        background-position: 48px -380px;
-    }
-    66%
-    {
-        background-position: 48px 0;
-    }
-}
-
-
-.horse.runUp
-{
-    width: 48px;
-    height: 64px;
-
-    -webkit-animation: horseUp steps(1) .75s  infinite;
-            animation: horseUp steps(1) .75s  infinite;
-
-    background-position: 0 192px;
-}
-
-
-@-webkit-keyframes horseUp
-{
-    0%,
-    100%
-    {
-        background-position: 0 -192px;
-    }
-    33%
-    {
-        background-position: 0 -380px;
-    }
-    66%
-    {
-        background-position: 0 0;
-    }
-}
-
-
-@keyframes horseUp
-{
-    0%,
-    100%
-    {
-        background-position: 0 -192px;
-    }
-    33%
-    {
-        background-position: 0 -380px;
-    }
-    66%
-    {
-        background-position: 0 0;
-    }
-}
-
 
 #startline
 {
@@ -260,6 +149,237 @@ body
     background-size: 1vw 1vw;
 }
 
+#start
+{
+    font-family: Arial;
+    font-size: 20px;
+
+    float: right;
+
+    margin: 1vw;
+    padding: 1vw;
+    padding: 10px 20px 10px 20px;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-decoration: none;
+
+    color: #fff;
+    border-radius: 28px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image:         linear-gradient(to bottom, #3498db, #2980b9);
+    text-shadow: 2px 2px 2px #333;
+}
+
+#start:hover
+{
+    color: #000;
+}
+
+#start[disabled]
+{
+    cursor: default;
+
+    background: rgb(126, 126, 126);
+}
+
+#start[disabled]:hover
+{
+    color: #fff;
+}
+
+#bet,
+#results
+{
+    float: left;
+    overflow: auto;
+
+    width: 20vw;
+    margin-top: 5vh;
+    margin-left: 2vw;
+    padding: 1vw;
+}
+
+#results
+{
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    pointer-events: none;
+}
+
+#closeside
+{
+    font-weight: bold;
+
+    float: right;
+
+    margin-top: 1em;
+    margin-left: auto;
+
+    cursor: pointer;
+    text-align: right;
+}
+
+#announcement
+{
+    font-size: 20px;
+
+    width: 30vw;
+    margin-top: 1.5vh;
+    padding: 1vw;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+    pointer-events: none;
+}
+
+#open
+{
+    font-family: Arial;
+    font-size: 20px;
+
+    width: 5vw;
+    margin-top: 1.5vh;
+    padding: 1vw;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+
+    color: #fff;
+    border-radius: 28px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image:         linear-gradient(to bottom, #3498db, #2980b9);
+    text-shadow: 2px 2px 2px #333;
+}
+#open:hover
+{
+    color: #000;
+}
+
+#open[disabled]
+{
+    cursor: default;
+
+    background: rgb(126, 126, 126);
+}
+
+#open:hover[disabled]
+{
+    color: #fff;
+}
+
+#funds
+{
+    font-weight: bold;
+}
+
+#funds:before
+{
+    content: '£';
+}
+
+#results
+{
+    position: absolute;
+
+    width: 10vw; margin-top: 8vh; margin-left: 48vw;
+}
+#results td
+{
+    width: 30px;
+    height: 30px; background-repeat: no-repeat; background-position: 0 -64px;
+}
+#results .horse1
+{
+    background-image: url(images/head0.png);
+}
+#results .horse2
+{
+    background-image: url(images/head4.png);
+}
+#results .horse3
+{
+    background-image: url(images/head1.png);
+}
+#results .horse4
+{
+    background-image: url(images/head2.png);
+}
+
+#odds
+{
+    position: absolute;
+
+    width: 10vw;
+    margin-top: 27vh;
+    margin-left: 2vw;
+    padding: 1vw;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    pointer-events: none;
+}
+
+#odds ul
+{
+    margin-top: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.timer
+{
+    font-size: 20px;
+
+    margin-top: 1.5vh;
+    padding: 1vw;
+
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+    pointer-events: none;
+}
+
+.credits,
+.info
+{
+    width: 100%;
+}
+
+.container
+{
+    display: flex;
+
+    width: 100%;
+}
+
+.card
+{
+    border: 2px solid #555;
+    border-radius: 20px;
+    background-color: #ffefb4;
+}
+
+/*horses*/
 #horse4 .rider .head
 {
     background-image: url(images/head2.png);
@@ -268,7 +388,6 @@ body
 {
     background-image: url(images/body3.png);
 }
-
 
 #horse3 .rider .head
 {
@@ -576,305 +695,172 @@ body
     }
 }
 
-
-#start
-{
-    font-family: Arial;
-    font-size: 20px;
-
-    float: right;
-
-    margin: 1vw;
-    padding: 1vw;
-    padding: 10px 20px 10px 20px;
-
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    text-decoration: none;
-
-    color: #fff;
-    border-radius: 28px;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-    background-image:         linear-gradient(to bottom, #3498db, #2980b9);
-    text-shadow: 2px 2px 2px #333;
-}
-
-#start:hover
-{
-    color: #000;
-}
-
-#start[disabled]
-{
-    cursor: default;
-
-    background: rgb(126, 126, 126);
-}
-
-#start[disabled]:hover
-{
-    color: #fff;
-}
-
-#bet,
-#results
-{
-    float: left;
-    overflow: auto;
-
-    width: 20vw;
-    margin-top: 5vh;
-    margin-left: 2vw;
-    padding: 1vw;
-}
-
-#results
-{
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    pointer-events: none;
-}
-
-aside
-{
-    position: fixed;
-    z-index: 1000;
-    left: 100%;
-
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-
-    width: 200px;
-    height: calc(100vh - 40px);
-    padding: 20px;
-
-    border-left: 5px solid #bbb;
-    background-color: #ddd;
-
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -ms-flex-flow: row wrap;
-        flex-flow: row wrap;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-}
-
-#closeside
-{
-    font-weight: bold;
-
-    float: right;
-
-    margin-top: 1em;
-    margin-left: auto;
-
-    cursor: pointer;
-    text-align: right;
-}
-
-header
-{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-
-    width: 100vw;
-
-    -ms-flex-item-align: start;
-    align-self: flex-start;
-    -webkit-box-pack: space-between;
-    -ms-flex-pack: space-between;
-    justify-content: space-between;
-}
-
-#announcement
-{
-    font-size: 20px;
-
-    width: 30vw;
-    margin-top: 1.5vh;
-    padding: 1vw;
-
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    text-align: center;
-    pointer-events: none;
-}
-
-#open
-{
-    font-family: Arial;
-    font-size: 20px;
-
-    width: 5vw;
-    margin-top: 1.5vh;
-    padding: 1vw;
-
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    text-align: center;
-
-    color: #fff;
-    border-radius: 28px;
-    background: #3498db;
-    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-    background-image:         linear-gradient(to bottom, #3498db, #2980b9);
-    text-shadow: 2px 2px 2px #333;
-}
-#open:hover
-{
-    color: #000;
-}
-
-#open[disabled]
-{
-    cursor: default;
-
-    background: rgb(126, 126, 126);
-}
-
-#open:hover[disabled]
-{
-    color: #fff;
-}
-
-#funds
-{
-    font-weight: bold;
-}
-
-#funds:before
-{
-    content: '£';
-}
-
-
-img
-{
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    pointer-events: none;
-}
-
-label,
-input,
-select
+/*animations*/
+.horse.runLeft
 {
     display: block;
-    float: left; width: 8vw; margin-bottom: .5vh;
+
+    width: 96px;
+    height: 60px;
+
+    -webkit-animation: horseLeft steps(1) .5s  infinite;
+            animation: horseLeft steps(1) .5s  infinite;
+
+    background-position: 0 -256px;
 }
 
-label
+@-webkit-keyframes horseLeft
 {
-    clear: left;
+    0%,
+    100%
+    {
+        background-position: 0 -256px;
+    }
+    50%
+    {
+        background-position: 0 -450px;
+    }
 }
 
-#results
+@keyframes horseLeft
 {
-    position: absolute;
-
-    width: 10vw; margin-top: 8vh; margin-left: 48vw;
+    0%,
+    100%
+    {
+        background-position: 0 -256px;
+    }
+    50%
+    {
+        background-position: 0 -450px;
+    }
 }
-#results td
+
+
+.horse.runRight
 {
-    width: 30px;
-    height: 30px; background-repeat: no-repeat; background-position: 0 -64px;
+    display: block;
+
+    width: 96px;
+    height: 60px;
+
+    -webkit-animation: horseRight steps(1) .5s  infinite;
+            animation: horseRight steps(1) .5s  infinite;
+
+    background-position: 0 -320px;
 }
-#results .horse1
+
+@-webkit-keyframes horseRight
 {
-    background-image: url(images/head0.png);
+    0%,
+    100%
+    {
+        background-position: 0 -320px;
+    }
+    50%
+    {
+        background-position: 0 -512px;
+    }
 }
-#results .horse2
+
+@keyframes horseRight
 {
-    background-image: url(images/head4.png);
+    0%,
+    100%
+    {
+        background-position: 0 -320px;
+    }
+    50%
+    {
+        background-position: 0 -512px;
+    }
 }
-#results .horse3
+
+.horse.runDown
 {
-    background-image: url(images/head1.png);
+    width: 48px;
+    height: 64px;
+
+    -webkit-animation: horseDown steps(1) .75s  infinite;
+            animation: horseDown steps(1) .75s  infinite;
+
+    background-position: 48px 192px;
 }
-#results .horse4
+
+@-webkit-keyframes horseDown
 {
-    background-image: url(images/head2.png);
+    0%,
+    100%
+    {
+        background-position: 48px -192px;
+    }
+    33%
+    {
+        background-position: 48px -380px;
+    }
+    66%
+    {
+        background-position: 48px 0;
+    }
 }
 
-#odds
+@keyframes horseDown
 {
-    position: absolute;
-
-    width: 10vw;
-    margin-top: 27vh;
-    margin-left: 2vw;
-    padding: 1vw;
-
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    pointer-events: none;
+    0%,
+    100%
+    {
+        background-position: 48px -192px;
+    }
+    33%
+    {
+        background-position: 48px -380px;
+    }
+    66%
+    {
+        background-position: 48px 0;
+    }
 }
 
-#odds ul
+.horse.runUp
 {
-    margin-top: 0;
-    padding: 0;
+    width: 48px;
+    height: 64px;
 
-    list-style: none;
+    -webkit-animation: horseUp steps(1) .75s  infinite;
+            animation: horseUp steps(1) .75s  infinite;
+
+    background-position: 0 192px;
 }
 
-.timer
+@-webkit-keyframes horseUp
 {
-    font-size: 20px;
-
-    margin-top: 1.5vh;
-    padding: 1vw;
-
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    text-align: center;
-    pointer-events: none;
+    0%,
+    100%
+    {
+        background-position: 0 -192px;
+    }
+    33%
+    {
+        background-position: 0 -380px;
+    }
+    66%
+    {
+        background-position: 0 0;
+    }
 }
 
-.credits
+@keyframes horseUp
 {
-    width: 100%;
+    0%,
+    100%
+    {
+        background-position: 0 -192px;
+    }
+    33%
+    {
+        background-position: 0 -380px;
+    }
+    66%
+    {
+        background-position: 0 0;
+    }
 }
-
-.info
-{
-    width: 100%;
-}
-
-.container
-{
-    display: flex;
-
-    width: 100%;
-}
-
-.card
-{
-    border: 2px solid #555;
-    border-radius: 20px;
-    background-color: #ffefb4;
-}
-
-/*horses*/
-
-/*animations*/
