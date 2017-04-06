@@ -746,6 +746,11 @@ header
     background: rgb(126, 126, 126);
 }
 
+#open:hover[disabled]
+{
+    color: #fff;
+}
+
 #funds
 {
     font-weight: bold;
@@ -869,3 +874,7 @@ label
     border-radius: 20px;
     background-color: #ffefb4;
 }
+
+/*horses*/
+
+/*animations*/

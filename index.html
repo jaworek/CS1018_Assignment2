@@ -10,7 +10,7 @@
 	<meta name="description" content="Horse racing simulator">
 	<meta name="keywords" content="horse, racing, bet, hazard">
 
-	<link rel="stylesheet" href="game.css" />
+	<link rel="stylesheet" href="game.css">
 	<script src="game.js"></script>
 </head>
 
@@ -99,29 +99,35 @@
 			<div id="startline"></div>
 
 			<div class="inner">
-				<button id="start">
-				Start Race
-			</button>
+
+				<button id="start">Start Race</button>
 
 				<div class="card" id="bet">
+
 					<p>You currently have <span id="funds">100</span></p>
+
 					<label>Bet Amount (£)</label>
 					<input type="number" id="amount" required>
+
 					<label>Number of laps</label>
+
 					<select id="laps">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
-				</select>
+					</select>
+
 					<label>Bet on horse:</label>
+
 					<select id="bethorse">
 						<option value="horse1">White</option>
 						<option value="horse2">Blue</option>
 						<option value="horse2">Green</option>
 						<option value="horse2">Brown</option>
-				</select>
+					</select>
+
 				</div>
 
 				<div class="card" id="odds">
@@ -140,7 +146,6 @@
 					<thead>
 						<tr>
 							<th>Results</th>
-							<th></th>
 						</tr>
 					</thead>
 					<tr>
@@ -156,6 +161,7 @@
 						<td>4th</td>
 					</tr>
 				</table>
+
 			</div>
 
 		</main>

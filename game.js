@@ -15,7 +15,7 @@ var line;
 // timer variables
 var timer;
 var ticks = 0;
-// miscellaneous
+// other variables
 var announcement;
 var oddsTable = [];
 var asideInterval;
@@ -291,6 +291,7 @@ function clearResults()
 }
 
 // open, close and animate aside
+// source: Thomas Butler, https://github.com/CSY1018/Topic4
 function asideHide()
 {
     var aside = document.getElementsByTagName('aside')[0];
