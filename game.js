@@ -1,3 +1,5 @@
+/*Jan Jaworski, student id: 16443007*/
+
 // bet variables
 var place = 1;
 var funds = 100;
